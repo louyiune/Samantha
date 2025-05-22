@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SAMANTHA Premium</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .premium-block {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 40px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .premium-block h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .premium-benefits {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .premium-benefits li {
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .premium-button {
+            background-color: #fff;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .premium-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .response-message {
+            margin-top: 20px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1><a href="index.html">SAMANTHA</a></h1>
+    </div>
+
+    <div class="premium-block">
+        <h2>💎 À quelques clics du bonheur </h2>
+        <h3 class="premium-subtitle">Des avantages exclusifs pour briller (encore plus) ✨</h3>        <ul class="premium-benefits">
+            <li>1 semaine : 11,99 €/sem (seulement !)</li>
+            <li>1 mois : 5,59 €/sem (économise 53%)</li>
+            <li>3 mois : 3,49 €/sem (économise 73%)</li>
+    </div>
+
+    <div class="premium-block">
+        <h2>💎 SAMANTHA Premium</h2>
+        <h3 class="premium-subtitle">Une expérience enrichie par vos insécurités (et votre carte bleue).</h3> 
+        <ul class="premium-benefits">
+            <li>👻 Voir qui t’a ghosté en temps réel</li>
+            <li>🤖 Envoyer des messages automatiquement à tous les profils disponibles pour augmenter tes chances de trouver l'âme soeur !</li>
+            <li>📈 Booster ton profil selon ton capital de désirabilité perçu</li>
+        </ul>
+        <button class="premium-button" onclick="showSarcasm()">Activer mon ascension sociale</button>
+        <p class="response-message" id="response-message"></p>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="premium.html">💎 Passez à SAMANTHA Premium</a>
+            <a href="ajouter_mon_profil.html">➕ Ajouter ton profil</a>
+            <a href="#">⭐ M'ont liké</a>
+        </div>
+    </footer>
+
+    <script>
+        function showSarcasm() {
+            document.getElementById("response-message").textContent = 
+                "Félicitations ! Grâce à votre carte bleue, vous êtes désormais plus aimable.";
+        }
+    </script>
+</body>
+</html>
