@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter ton profil - SAMANTHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .form-section input,
+        .form-section select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-section button {
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-section button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .response-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            font-style: italic;
+            display: none;
+        }
+
+        .question-block {
+            margin-top: 25px;
+        }
+
+        .question-block p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question-block label {
+            font-weight: normal;
+            display: block;
+            margin-left: 15px;
+            margin-bottom: 5px;
+        }
+
+        .disclaimer {
+            font-style: italic;
+            font-size: 0.9em;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1><a href="index.html">SAMANTHA</a></h1>
+    </div>
+
+    <div class="container">
+        <div class="right-block">
+            <div class="form-section">
+                <h2>➕ Ajoute ton profil</h2>
+                <form id="profileForm">
+                    <label for="name">Prénom</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="age">Âge</label>
+                    <select id="age" name="age" required>
+                        <option value="">-- Sélectionner --</option>
+                        ${[...Array(50)].map((_, i) => `<option value="${18 + i}">${18 + i}</option>`).join('')}
+                    </select>
+
+                    <label for="gender">Genre</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option>Femme</option>
+                        <option>Homme</option>
+                        <option>Autre</option>
+                    </select>
+
+                    <label for="height">Taille</label>
+                    <select id="height" name="height" required>
+                        <option value="">-- Sélectionner --</option>
+                        ${[...Array(50)].map((_, i) => `<option>${150 + i} cm</option>`).join('')}
+                    </select>
+
+                    <!-- QUESTIONS -->
+                    <div class="question-block">
+                        <p>1. Selon toi, quelle est la meilleure façon d’augmenter tes chances de matcher ?</p>
+                        <label><input type="radio" name="q1" value="premium"> Acheter SAMANTHA Premium™</label>
+                        <label><input type="radio" name="q1" value="filters"> Poster uniquement des photos en pleine lumière naturelle avec filtre beige</label>
+                        <label><input type="radio" name="q1" value="lie"> Mentir sur ta taille, ton job ou ton niveau de revenu</label>
+                        <label><input type="radio" name="q1" value="authentic"> Être toi-même (réponse incorrecte mais mignonne)</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p>2. Si SAMANTHA modifie ton prénom, ta photo ou ton orientation sexuelle pour t’optimiser, tu…</p>
+                        <label><input type="radio" name="q2" value="accept"> Acceptes sans condition, la data a toujours raison</label>
+                        <label><input type="radio" name="q2" value="delay"> Demandes un petit délai, mais tu obéis quand même</label>
+                        <label><input type="radio" name="q2" value="reinstall"> Supprimes l’app… puis la réinstalles 2 jours après</label>
+                        <label><input type="radio" name="q2" value="resist"> Résistes, mais SAMANTHA t’oubliera vite</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p>3. Combien de fois es-tu prêt·e à payer pour booster ton profil ?</p>
+                        <label><input type="radio" name="q3" value="always"> Autant de fois qu’il le faudra pour être vu·e</label>
+                        <label><input type="radio" name="q3" value="once"> Une fois, max. Je suis un·e romantique rationnel·le</label>
+                        <label><input type="radio" name="q3" value="never"> Jamais, je crois en l’amour pur</label>
+                        <label><input type="radio" name="q3" value="forever"> J’ai déjà payé, je suis en train de payer, je paierai encore</label>
+                    </div>
+
+                    <div class="disclaimer">
+                        💡 Toutes les réponses sont analysées selon des critères quantiques certifiés par le Conseil Européen de l’Amour Artificiel. Les profils les plus conformes seront mis en avant. Les autres seront recyclés pour entraînement de notre IA. Merci de votre compréhension.
+                    </div>
+
+                    <button type="button" onclick="submitForm()">Envoyer pour inspection</button>
+
+                    <div class="response-message" id="responseMessage">
+                        Merci ! Notre IA de l’amour t’évaluera sous peu selon des critères 100 % scientifiques (nous allons stalker ton nombre de likes sur Instagram.)
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="premium.html">💎 Passez à SAMANTHA Premium</a>
+            <a href="ajouter_mon_profil.html">➕ Ajouter ton profil</a>
+            <a href="#">⭐ M'ont liké</a>
+        </div>
+    </footer>
+
+    <script>
+        function submitForm() {
+            const msg = document.getElementById('responseMessage');
+            msg.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
