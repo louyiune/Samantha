@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SAMANTHA - Profils</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .filter-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .filter-controls select {
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1><a href="index.html">SAMANTHA</a></h1>
+    </div>
+
+    <div class="filter-controls">
+        <label for="genderFilter">Filtrer par genre :</label>
+        <select id="genderFilter" onchange="applyGenderFilter()">
+            <option value="all">Les deux</option>
+            <option value="Femme">Femme</option>
+            <option value="Homme">Homme</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div class="left-block">
+            <div class="info-block">
+                <p>Et si je te disais que</p>
+                <h2>Avec SAMANTHA tu peux rencontrer dès maintenant ta future relation parasociale 💖 (l'amour se vend mieux quand il est bien éclairé)</h2>
+            </div>
+
+            <div class="info-block discover">
+                <h2>DÉCOUVRE NOTRE SÉLECTION DE PROFILS QUI TE SONT (😉) ADAPTÉS</h2>
+            </div>
+        </div>
+
+        <div class="right-block">
+            <div id="profile-card" class="profile-card fade-in">
+                <h3><a href="#" id="profile-link">Nom</a></h3>
+                <div class="profile-info">
+                    <span id="profile-age"></span>
+                    <div class="divider">|</div>
+                    <span id="profile-gender"></span>
+                    <div class="divider">|</div>
+                    <span id="profile-height"></span>
+                </div>
+                <div class="profile-details">
+                    <p id="profile-school"></p>
+                    <hr>
+                    <p id="profile-languages"></p>
+                    <hr>
+                    <p id="profile-relationship"></p>
+                </div>
+                <img id="profile-image" src="" alt="Photo de profil" class="profile-img">
+                <div class="like-dislike">
+                    <button onclick="handleLike()">👍 J'aime</button>
+                    <button onclick="showNextProfile()">👎 J'aime pas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="premium.html">💿 Passez à SAMANTHA Premium</a>
+            <a href="ajouter_mon_profil.html">➕ Ajouter ton profil</a>
+            <a href="#">⭐ M'ont liké</a>
+        </div>
+    </footer>
+
+    <script>
+        const profiles = [
+            { name: "Amelie ✨", gender: "Femme", age: 24, height: 166, school: "ULB", languages: "Français, Anglais", relationship: "Relation courte, ouvert·e aux relations longues", image: "amelie.jpg", link: "amelie.html" },
+            { name: "Alex 🧑‍🎨", gender: "Homme", age: 21, height: 181, school: "Solvay Brussels School Economics & Management", languages: "Français, Anglais, Espagnol", relationship: "Love bombing suivi d'un ghosting", image: "alex.jpg", link: "alex.html" },
+            { name: "Armand 😊", gender: "Homme", age: 21, height: 176, school: "KU Leuven", languages: "Français", relationship: "Love bombing suivi d'un ghosting", image: "armand.jpg", link: "armand.html" },
+            { name: "Daali 😜", gender: "Homme", age: 25, height: 191, school: "Ecole de médecine à Bruxelles", languages: "Français, Anglais", relationship: "Relation courte", image: "daali.jpg", link: "daali.html" },
+            { name: "Emilie 😆", gender: "Femme", age: 20, height: 164, school: "Cours Florent", languages: "Français, Anglais", relationship: "One night stand", image: "emilie.jpg", link: "emilie.html" },
+            { name: "Josephine 😍", gender: "Femme", age: 22, height: 170, school: "ERG", languages: "Français, Anglais, Espagnol", relationship: "Ouverte à tout type de relation", image: "josephine.jpg", link: "josephine.html" },
+            { name: "Lucas 😏", gender: "Homme", age: 27, height: 190, school: "IHECS", languages: "Français, Anglais", relationship: "One night stand", image: "lucas.jpg", link: "lucas.html" },
+            { name: "Mathieu 🩴", gender: "Homme", age: 23, height: 178, school: "EFP", languages: "Français", relationship: "Ouvert à tout type de relation", image: "mathieu.jpg", link: "mathieu.html" },
+            { name: "Nora 😍", gender: "Femme", age: 26, height: 168, school: "ULB", languages: "Français, Anglais", relationship: "Relation longue", image: "nora.jpg", link: "nora.html" },
+            { name: "Edward 💜", gender: "Homme", age: 26, height: 185, school: "Haute école libre de Bruxelles Ilya Prigogine", languages: "Français, Anglais", relationship: "Relation courte, ouvert·e aux relations longues", image: "edward.jpg", link: "edward.html" },
+            { name: "Vincent 💁", gender: "Homme", age: 20, height: 192, school: "ENSAV La Cambre", languages: "Français, Anglais", relationship: "Relation courte", image: "vincent.jpg", link: "vincent.html" },
+            { name: "Victoria 💕", gender: "Femme", age: 25, height: 166, school: "ULB", languages: "Français, Anglais", relationship: "Relation longue", image: "victoria.jpg", link: "victoria.html" }
+        ];
+
+        let filteredProfiles = [...profiles];
+        let currentProfile = 0;
+
+        function displayProfile(profile) {
+            const card = document.getElementById("profile-card");
+            card.classList.remove("fade-in");
+            void card.offsetWidth;
+            card.classList.add("fade-in");
+
+            document.getElementById("profile-link").textContent = profile.name;
+            document.getElementById("profile-link").href = profile.link;
+            document.getElementById("profile-age").textContent = `🎂 ${profile.age} ans`;
+            document.getElementById("profile-gender").textContent = profile.gender === "Femme" ? "👪 Femme" : "👨 Homme";
+            document.getElementById("profile-height").textContent = `📏 ${profile.height} cm`;
+            document.getElementById("profile-school").textContent = `🏫 ${profile.school}`;
+            document.getElementById("profile-languages").textContent = `🌐 ${profile.languages}`;
+            document.getElementById("profile-relationship").textContent = `💖 ${profile.relationship}`;
+            document.getElementById("profile-image").src = profile.image;
+        }
+
+        function showNextProfile() {
+            currentProfile = (currentProfile + 1) % filteredProfiles.length;
+            displayProfile(filteredProfiles[currentProfile]);
+        }
+
+        function handleLike() {
+            window.location.href = filteredProfiles[currentProfile].link;
+        }
+
+        function applyGenderFilter() {
+            const filter = document.getElementById("genderFilter").value;
+            filteredProfiles = profiles.filter(p => filter === "all" || p.gender === filter);
+            currentProfile = 0;
+            displayProfile(filteredProfiles[currentProfile]);
+        }
+
+        applyGenderFilter();
+    </script>
+</body>
+</html>
